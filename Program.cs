@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,7 +15,8 @@ namespace RegexCopy
             List<string> rs = new List<string>();
             string line;
             Regex re = new Regex(pattern, RegexOptions.Compiled);
-
+            Stopwatch stw = new Stopwatch();
+            stw.Start();
             using(FileStream fs = new FileStream("a.txt", FileMode.Open, FileAccess.Read))
             {
                 using(BufferedStream bs = new BufferedStream(fs))
@@ -31,6 +33,11 @@ namespace RegexCopy
                                     {
                                         sw.WriteLine(line);
                                     }
+
+                                    //if(re.Match(line).Success)
+                                    //{
+                                    //    sw.WriteLine(line);
+                                    //}
                                 }
                             }
                         }
@@ -38,6 +45,16 @@ namespace RegexCopy
                     }
                 }
             }
+            stw.Stop();
+
+
+            TimeSpan ts = stw.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
             Console.WriteLine("OK");
             Console.ReadKey();
         }
