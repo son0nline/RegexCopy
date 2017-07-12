@@ -17,7 +17,7 @@ namespace RegexCopy
             Regex re = new Regex(pattern, RegexOptions.Compiled);
             Stopwatch stw = new Stopwatch();
             stw.Start();
-            using(FileStream fs = new FileStream("a.txt", FileMode.Open, FileAccess.Read))
+            using(FileStream fs = new FileStream("aircore_0.log", FileMode.Open, FileAccess.Read))
             {
                 using(BufferedStream bs = new BufferedStream(fs))
                 {
@@ -29,15 +29,21 @@ namespace RegexCopy
                             {
                                 while((line = sr.ReadLine()) != null)
                                 {
-                                    if(re.IsMatch(line))
-                                    {
-                                        sw.WriteLine(line);
-                                    }
+                                    //if(re.IsMatch(line))
+                                    //{
+                                    //    sw.WriteLine(line);
+                                    //}
 
                                     //if(re.Match(line).Success)
                                     //{
                                     //    sw.WriteLine(line);
                                     //}
+
+                                    // fastest way
+                                    if(line.Contains(@"FTKTE00538001	[SQL]	[START]"))
+                                    {
+                                        sw.WriteLine(line);
+                                    }
                                 }
                             }
                         }
