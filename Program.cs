@@ -17,7 +17,7 @@ namespace RegexCopy
             Regex re = new Regex(pattern, RegexOptions.Compiled);
             Stopwatch stw = new Stopwatch();
             stw.Start();
-            using(FileStream fs = new FileStream("aircore_0.log", FileMode.Open, FileAccess.Read))
+            using(FileStream fs = new FileStream("aircore_0.log.txt", FileMode.Open, FileAccess.Read))
             {
                 using(BufferedStream bs = new BufferedStream(fs))
                 {
@@ -40,7 +40,7 @@ namespace RegexCopy
                                     //}
 
                                     // fastest way
-                                    if(line.Contains(@"FTKTE00538001	[SQL]	[START]"))
+                                    if(line.Contains(@"	[SQL]	[START]"))
                                     {
                                         sw.WriteLine(line);
                                     }
